@@ -14,20 +14,43 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    # strategy:
+    #   matrix:
+    #     node-version: [18.x, 20.x, 22.x]
+    #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    # steps:
+    # - uses: actions/checkout@v4
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+    # # npm ci命令是用于安装项目依赖的命令，它与常规的npm安装命令（npm install）相比，在安装速度和规则严格性方面有所提升，能够确保依赖的安装一致性和稳定性（锁定版本）。 在package.json文件中，每次执行npm install命令后，对应的依赖版本号前面会有一个^符号。    
+    # - run: npm ci
+    # # 构建
+    # - run: npm run build --if-present
+    # - run: npm test
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    # npm ci命令是用于安装项目依赖的命令，它与常规的npm安装命令（npm install）相比，在安装速度和规则严格性方面有所提升，能够确保依赖的安装一致性和稳定性（锁定版本）。 在package.json文件中，每次执行npm install命令后，对应的依赖版本号前面会有一个^符号。    
-    - run: npm ci
-    # 构建
-    - run: npm run build --if-present
-    - run: npm test
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+      - run: pnpm install
+      - run: pnpm run build --if-present
+      - run: pnpm test
+      
+        
