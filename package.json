@@ -17,6 +17,7 @@
     "test:unit": "poi puppet src/**/*.test.js --test --plugin @poi/puppet --framework mocha"
   },
   "dependencies": {
+    "vue-cli-service": "^5.0.8",	  
     "jump.js": "^1.0.2",
     "loadjs": "^4.3.0",
     "marked": "^14.1.2",
