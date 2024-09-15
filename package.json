@@ -5,7 +5,7 @@
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
     "build:umd": "poi --config build/poi.lib.config.js --prod",
     "build:es": "vue-compile src --config build/vue-compile.config.js",
-    "build:vue": "vue-cli-service build"
+    "build:vue": "vue-cli-service build",
     "build": "npm run build:vue && npm run build:umd && npm run build:es",
     "test": "npm run lint && npm run test:unit",
     "lint": "xo",
