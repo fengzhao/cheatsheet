@@ -2,9 +2,11 @@
   "name": "docute",
   "version": "4.11.0",
   "scripts": {
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
     "build:umd": "poi --config build/poi.lib.config.js --prod",
     "build:es": "vue-compile src --config build/vue-compile.config.js",
-    "build": "npm run build:umd && npm run build:es",
+    "build:vue": "vue-cli-service build"
+    "build": "npm run build:vue && npm run build:umd && npm run build:es",
     "test": "npm run lint && npm run test:unit",
     "lint": "xo",
     "website": "poi --serve --config build/poi.website.config.js",
